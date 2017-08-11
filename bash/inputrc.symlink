@@ -3,3 +3,6 @@
 "\e[A":history-search-backward
 # arrow down
 "\e[B":history-search-forward
+
+set colored-stats on
+set mark-symlinked-directories on
