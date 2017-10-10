@@ -34,7 +34,11 @@
     legacyMode: true
   core:
     audioBeep: false
-    automaticallyUpdate: false
+    # I thought I needed the below to get laneguage-babel to be used by default. Although the package does it automatically
+    # customFileTypes:
+    #   "source.js.jsx": [
+    #     "js"
+    #   ]
     disabledPackages: [
       "spell-check"
     ]
@@ -50,6 +54,7 @@
     tabType: "soft"
   "exception-reporting":
     userId: "d671f9f3-1eff-8ad5-bcf4-867c4c413247"
+  "file-icons": {}
   "find-and-replace":
     scrollToResultOnLiveSearch: true
   linter:
@@ -59,6 +64,7 @@
     lintPreviewTabs: false
   "linter-rubocop": {}
   "linter-ui-default":
+    showPanel: true
     showProviderName: true
   "toggle-quotes": {}
   welcome:
