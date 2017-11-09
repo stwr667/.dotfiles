@@ -37,3 +37,5 @@
   cmd = diffmerge $LOCAL $REMOTE
 [pull]
   ff = true
+[rerere]
+  enabled = true
