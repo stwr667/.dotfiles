@@ -11,7 +11,10 @@ export RAILS_ENV=development
 
 ### POSTGRES ###
 # Set the data location of postgres so you don't need it in your start/stop commands:
-export PGDATA='/usr/local/var/postgres/'
+# TODO: Remove (now that we use Postgres.app):
+# export PGDATA='/usr/local/var/postgres/'
+# Add Postgres.app's bin to the path:
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 # Increase the 2 kernel memory management values for postgres from very small, to ok values:
 #UPDATE: Shouldn't need these params. Re-installing postgres from brew fixed this issue:
 #sudo sysctl -w kern.sysv.shmall=65536
