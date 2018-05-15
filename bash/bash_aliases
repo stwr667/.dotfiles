@@ -23,8 +23,11 @@ alias gl-pretty='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=sh
 alias gb-recent='for ref in $(git for-each-ref --sort=-committerdate --format="%(refname)" refs/heads/ refs/remotes ); do git log -n1 $ref --pretty=format:"%Cgreen%cr%Creset %C(yellow)%d%Creset %C(bold blue)<%an>%Creset%n" | cat ; done | awk '"'! a["'$0'"]++'"
 alias clear-rerere='rm -rf .git/rr-cache'
 alias la='ls -al'
-alias unc='bundle exec unicorn -p 3000 -c $HOME/.unicornrc'
-alias unc_applog='{ tail -f log/development.log & bundle exec unicorn -p 3000 -c $HOME/.unicornrc; }'
+
+# https://blog.phusion.nl/2017/10/13/why-ruby-app-servers-break-on-macos-high-sierra-and-what-can-be-done-about-it/
+alias unc='OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES bundle exec unicorn -p 3000 -c $HOME/.unicornrc'
+alias unc_applog='{ tail -f log/development.log & OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES bundle exec unicorn -p 3000 -c $HOME/.unicornrc; }'
+
 alias brs='bundle exec rails s'
 alias brc='bundle exec rails c'
 alias brcs='spring stop && bundle exec rails c'
