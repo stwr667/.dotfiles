@@ -73,5 +73,26 @@ source ~/bin/git-completion.bash
 
 ### End Mark's Preferences ###
 
+# ImageMagick ##########################################################################################################
+# NOTE: See below RE getting ImageMagick working with RMagick AND jpeg (for static maps)
+# c.f: https://stackoverflow.com/a/41788501/1852005
+#
+# website (master) au:dev $ brew install imagemagick@6
+# ==> Downloading https://homebrew.bintray.com/bottles/imagemagick@6-6.9.9-50.sierra.bottle.tar.gz
+# ######################################################################## 100.0%
+# ==> Pouring imagemagick@6-6.9.9-50.sierra.bottle.tar.gz
+# ==> Caveats
+# This formula is keg-only, which means it was not symlinked into /usr/local,
+# because this is an alternate version of another formula.
+#
+# If you need to have this software first in your PATH run:
+export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
+# For compilers to find this software you may need to set:
+#     LDFLAGS:  -L/usr/local/opt/imagemagick@6/lib
+#     CPPFLAGS: -I/usr/local/opt/imagemagick@6/include
+# For pkg-config to find this software you may need to set:
+#     PKG_CONFIG_PATH: /usr/local/opt/imagemagick@6/lib/pkgconfig
+########################################################################################################################
+
 # rvm needs to be at the bottom of the file in case there are other lines in .[ba|z]shrc that redefine path:
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function into a shell session
