@@ -94,5 +94,8 @@ export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 #     PKG_CONFIG_PATH: /usr/local/opt/imagemagick@6/lib/pkgconfig
 ########################################################################################################################
 
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/"
+export GEOSERVER_HOME="/opt/geoserver/"
+
 # rvm needs to be at the bottom of the file in case there are other lines in .[ba|z]shrc that redefine path:
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function into a shell session
