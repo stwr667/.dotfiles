@@ -34,6 +34,10 @@
     legacyMode: true
   core:
     audioBeep: false
+    customFileTypes:
+      "source.ruby.rails": [
+        "rb"
+      ]
     disabledPackages: [
       "spell-check"
     ]
