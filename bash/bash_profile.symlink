@@ -11,7 +11,10 @@ export RAILS_ENV=development
 
 ### POSTGRES ###
 # Set the data location of postgres so you don't need it in your start/stop commands:
-export PGDATA='/usr/local/var/postgres/'
+# TODO: Remove (now that we use Postgres.app):
+# export PGDATA='/usr/local/var/postgres/'
+# Add Postgres.app's bin to the path:
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 # Increase the 2 kernel memory management values for postgres from very small, to ok values:
 #UPDATE: Shouldn't need these params. Re-installing postgres from brew fixed this issue:
 #sudo sysctl -w kern.sysv.shmall=65536
@@ -70,5 +73,41 @@ source ~/bin/git-completion.bash
 
 ### End Mark's Preferences ###
 
+# ImageMagick ##########################################################################################################
+# NOTE: See below RE getting ImageMagick working with RMagick AND jpeg (for static maps)
+# c.f: https://stackoverflow.com/a/41788501/1852005
+#
+# website (master) au:dev $ brew install imagemagick@6
+# ==> Downloading https://homebrew.bintray.com/bottles/imagemagick@6-6.9.9-50.sierra.bottle.tar.gz
+# ######################################################################## 100.0%
+# ==> Pouring imagemagick@6-6.9.9-50.sierra.bottle.tar.gz
+# ==> Caveats
+# This formula is keg-only, which means it was not symlinked into /usr/local,
+# because this is an alternate version of another formula.
+#
+# If you need to have this software first in your PATH run:
+export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
+# For compilers to find this software you may need to set:
+#     LDFLAGS:  -L/usr/local/opt/imagemagick@6/lib
+#     CPPFLAGS: -I/usr/local/opt/imagemagick@6/include
+# For pkg-config to find this software you may need to set:
+#     PKG_CONFIG_PATH: /usr/local/opt/imagemagick@6/lib/pkgconfig
+########################################################################################################################
+
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/"
+export GEOSERVER_HOME="/opt/geoserver/"
+
 # rvm needs to be at the bottom of the file in case there are other lines in .[ba|z]shrc that redefine path:
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function into a shell session
+
+# Setting PATH for Python 3.6
+# The original version is saved in .bash_profile.pysave
+# Note that to run python 3.6, the command is `python3`, not `python`
+PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
+export PATH
+
+# Adding GDAL to the PATH:
+export PATH=/Library/Frameworks/GDAL.framework/Programs:$PATH
+# which overrides e.g:
+# ~ $ which ogr2ogr
+# /Applications/Postgres.app/Contents/Versions/latest/bin/ogr2ogr
