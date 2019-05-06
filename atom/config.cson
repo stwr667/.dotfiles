@@ -32,6 +32,8 @@
       "td"
     ]
     legacyMode: true
+  "autocomplete-plus":
+    confirmCompletion: "tab always, enter when suggestion explicitly selected"
   core:
     audioBeep: false
     customFileTypes:
