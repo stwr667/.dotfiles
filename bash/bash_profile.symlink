@@ -97,17 +97,26 @@ export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/"
 export GEOSERVER_HOME="/opt/geoserver/"
 
-# rvm needs to be at the bottom of the file in case there are other lines in .[ba|z]shrc that redefine path:
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function into a shell session
 
+# PYTHON SETTINGS START #############################################################
+
+# WORK SETTINGS:
 # Setting PATH for Python 3.6
 # The original version is saved in .bash_profile.pysave
 # Note that to run python 3.6, the command is `python3`, not `python`
 PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
 export PATH
 
+# HOME SETTINGS:
+export PATH=$PATH:$HOME/Library/Python/3.7/bin
+
+# PYTHON SETTINGS END ###############################################################
+
 # Adding GDAL to the PATH:
 export PATH=/Library/Frameworks/GDAL.framework/Programs:$PATH
 # which overrides e.g:
 # ~ $ which ogr2ogr
 # /Applications/Postgres.app/Contents/Versions/latest/bin/ogr2ogr
+
+# rvm needs to be at the bottom of the file in case there are other lines in .[ba|z]shrc that redefine path:
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function into a shell session
