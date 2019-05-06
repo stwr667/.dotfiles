@@ -44,10 +44,10 @@ parse_git_remote() {
 }
 
 get_region_and_rails_env() {
-  if [ "$RAILS_ENV" == "" -o "$AGW_region" == "" ]; then
+  if [ "$AGW_region" == "" ]; then
     return
   else
-    if [ "$RAILS_ENV" == "development" -a "$AGW_region" == "au" ]; then
+    if [ "$RAILS_ENV" == "" ]; then
       rails_env_tmp=dev
     else
       rails_env_tmp=$RAILS_ENV
