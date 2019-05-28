@@ -57,7 +57,12 @@ get_region_and_rails_env() {
       append_db_name_tmp=":$AGW_database_name"
     fi
 
-    echo " $AGW_region:$rails_env_tmp$append_db_name_tmp"
+    region_tmp=$AGW_region
+    if [ "$AGW_region" == "us" ]; then
+      region_tmp="*USA*"
+    fi
+
+    echo " $region_tmp:$rails_env_tmp$append_db_name_tmp"
   fi
 }
 
