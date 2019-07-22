@@ -49,6 +49,7 @@
       "one-dark-ui"
       "monokai"
     ]
+    useTreeSitterParsers: false
   editor:
     preferredLineLength: 120
     showIndentGuide: true
