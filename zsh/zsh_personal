@@ -1,0 +1,12 @@
+# Use extended and eager saved and shared history
+export HISTSIZE=50000
+export HISTFILESIZE=500000
+
+# Set my editor to sublime:
+export EDITOR=sublime
+
+# load all my aliases
+source $HOME/.dotfiles/zsh/zsh_aliases
+
+# Important for easy setting of terminal colours. Needed now for tig colours to work:
+export TERM=xterm-256color
