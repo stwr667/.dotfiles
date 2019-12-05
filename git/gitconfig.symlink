@@ -1,6 +1,6 @@
 [user]
   name = Stephen Wrathall
-  email = stephen.wrathall@agworld.com.au
+  email = stephen.wrathall@agworld.com
 [alias]
   co = checkout
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short

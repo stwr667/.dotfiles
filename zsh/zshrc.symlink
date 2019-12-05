@@ -1,127 +1,109 @@
-# The personal zsh profile options
 source $HOME/.dotfiles/zsh/zsh_personal
 
-# The rest might be quite machine specific...
-# or set up by the tools themselves
-# might need to actually not symlink zsh_profile but just
-# prepend the above to it as part of setup...
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Now with the config refactor, we need to explicitly set our rails env:
-export RAILS_ENV=development
+# Path to your oh-my-zsh installation.
+export ZSH="/Users/steve/.oh-my-zsh"
 
-### POSTGRES ###
-# Set the data location of postgres so you don't need it in your start/stop commands:
-# TODO: Remove (now that we use Postgres.app):
-# export PGDATA='/usr/local/var/postgres/'
-# Add Postgres.app's bin to the path:
-export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
-# Increase the 2 kernel memory management values for postgres from very small, to ok values:
-#UPDATE: Shouldn't need these params. Re-installing postgres from brew fixed this issue:
-#sudo sysctl -w kern.sysv.shmall=65536
-#sudo sysctl -w kern.sysv.shmmax=16777216
-### END POSTGRES###
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="robbyrussell"
 
-# Running bundle install doesn't work for website because of libv8 needing native extensions.
-# This options fixes that:
-#export RUBYOPT=-rrubygems gem install therubyracer
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
-# Set coloured directory/file highlighting. See: http://geekology.co.za/article/2009/04/how-to-enable-terminals-directory-and-file-color-highlighting-in-mac-os-x
-export CLICOLOR=1
-export LSCOLORS=ExFxCxDxBxegedabagacad
-#export LSCOLORS=GxFxCxDxBxegedabagaced
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
 
-# export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting  # This was put in .profile for the latest install (Oct/2014) # Now (Jun/2016) it seems to be in ~/.zshrc
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
 
-### Start Mark's Preferences ###
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
 
-parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-}
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
 
-parse_git_remote() {
-    tmp=$(parse_git_branch)
-    return `cat .git/config | grep $tmp -A 4 | grep remote | head -1 | sed -e 's/remote = \(.*\)/\1/'`
-}
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
 
-get_region_and_rails_env() {
-  if [ "$AGW_region" == "" ]; then
-    return
-  else
-    if [ "$RAILS_ENV" == "" ]; then
-      rails_env_tmp=dev
-    else
-      rails_env_tmp=$RAILS_ENV
-    fi
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
 
-    if [ -n "$AGW_database_name" ]; then
-      append_db_name_tmp=":$AGW_database_name"
-    fi
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
 
-    region_tmp=$AGW_region
-    if [ "$AGW_region" == "us" ]; then
-      region_tmp="*USA*"
-    fi
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
 
-    echo " $region_tmp:$rails_env_tmp$append_db_name_tmp"
-  fi
-}
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
 
-export PS1="\[\033[01;34m\]\W\[\033[31m\]\$(parse_git_branch)\[\033[33m\]\$(get_region_and_rails_env) \[\033[00m\]$\[\033[00m\] "
-export PATH=/Users/swrathal/bin:/usr/local/bin:/usr/local/sbin:$PATH:./node_modules/.bin
-export HISTTIMEFORMAT="%h/%d - %H:%M:%S "
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
 
-# This must be below the PATH command above, otherwise the 'node' in /usr/local/bin overrides nvm:
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-source ~/bin/git-completion.bash
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
 
-### End Mark's Preferences ###
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
 
-# ImageMagick ##########################################################################################################
-# NOTE: See below RE getting ImageMagick working with RMagick AND jpeg (for static maps)
-# c.f: https://stackoverflow.com/a/41788501/1852005
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(
+git
+bundler
+dotenv
+osx
+rake
+rbenv
+ruby
+)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
 #
-# website (master) au:dev $ brew install imagemagick@6
-# ==> Downloading https://homebrew.bintray.com/bottles/imagemagick@6-6.9.9-50.sierra.bottle.tar.gz
-# ######################################################################## 100.0%
-# ==> Pouring imagemagick@6-6.9.9-50.sierra.bottle.tar.gz
-# ==> Caveats
-# This formula is keg-only, which means it was not symlinked into /usr/local,
-# because this is an alternate version of another formula.
-#
-# If you need to have this software first in your PATH run:
-export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
-# For compilers to find this software you may need to set:
-#     LDFLAGS:  -L/usr/local/opt/imagemagick@6/lib
-#     CPPFLAGS: -I/usr/local/opt/imagemagick@6/include
-# For pkg-config to find this software you may need to set:
-#     PKG_CONFIG_PATH: /usr/local/opt/imagemagick@6/lib/pkgconfig
-########################################################################################################################
-
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_25.jdk/Contents/Home/"
-export GEOSERVER_HOME="/opt/geoserver/"
-
-
-# PYTHON SETTINGS START #############################################################
-
-# WORK SETTINGS:
-# Setting PATH for Python 3.6
-# The original version is saved in .bash_profile.pysave
-# Note that to run python 3.6, the command is `python3`, not `python`
-PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"
-export PATH
-
-# HOME SETTINGS:
-export PATH=$PATH:$HOME/Library/Python/3.7/bin
-
-# PYTHON SETTINGS END ###############################################################
-
-# Adding GDAL to the PATH:
-export PATH=/Library/Frameworks/GDAL.framework/Programs:$PATH
-# which overrides e.g:
-# ~ $ which ogr2ogr
-# /Applications/Postgres.app/Contents/Versions/latest/bin/ogr2ogr
-
-# rvm needs to be at the bottom of the file in case there are other lines in .[ba|z]shrc that redefine path:
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function into a shell session
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
