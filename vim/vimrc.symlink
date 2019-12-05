@@ -171,4 +171,4 @@ set whichwrap=h,l,~,[,],<,>
 set paste " Disable auto indenting. Annoying when pasting. Although may want to change this back!
 
 " Colorschemes are downloaded to: ~/.vim/colors
-colorscheme PerfectDark
+" colorscheme PerfectDark
