@@ -13,9 +13,9 @@
 try
 tell application "TextEdit"
     activate
-    set the bounds of the first window to {-690, 420, 0, 750}  # 1
-    set the bounds of the first window to {-690, 699, 0, 1012} # 2
-    # set the bounds of the first window to {-690, 773, 0, 1080}   # 3
+    set the bounds of the first window to {-1190, 732, 0, 1204}  # 1
+    set the bounds of the second window to {-1190, 632, 0, 1104} # 2
+    set the bounds of the third window to {-1190, 532, 0, 1004} # 3
     # set the bounds of the second window to {-690, 873, 0, 1180}   # 3
 end tell
 end try
@@ -23,9 +23,9 @@ end try
 try
 tell application "Chrome"
     activate
-    set the bounds of the first window to {-1920, -331, -690, 750}
-    set the bounds of the second window to {-1920, -331, -690, 750}
-    set the bounds of the third window to {-1920, -331, -690, 750}
+    set the bounds of the first window to {-2560, -331, -1190, 1440}
+    set the bounds of the second window to {-2560, -331, -1190, 1440}
+    set the bounds of the third window to {-2560, -331, -1190, 1440}
 end tell
 end try
 
@@ -33,7 +33,7 @@ try
 tell application "iTerm"
     activate
     # Note that for iTerm, it's worth getting coords exact so that manual resizing doesn't snap to a different size.
-    set the bounds of the first window to {-991, -331, 0, 414}
+    set the bounds of the first window to {-1390, -331, 0, 614}
 end tell
 end try
 
