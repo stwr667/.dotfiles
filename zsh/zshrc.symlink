@@ -1,4 +1,7 @@
 source $HOME/.dotfiles/zsh/zsh_personal
+#################################################################
+# START oh-my-zsh CONFIG
+#################################################################
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -108,8 +111,24 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+#################################################################
+# END oh-my-zsh CONFIG
+#################################################################
+
+export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
+export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
+export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
+
+#####################################################################
+# Commenting out all RVM stuff since switching to rbenv.
+#####################################################################
+
 # rvm needs to be at the bottom of the file in case there are other lines in .[ba|z]shrc that redefine path:
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function into a shell session
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function into a shell session
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+# export PATH="$PATH:$HOME/.rvm/bin"
+
+#####################################################################
+# Commenting out all RVM stuff since switching to rbenv.
+#####################################################################
