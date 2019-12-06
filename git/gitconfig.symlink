@@ -39,5 +39,3 @@
   ff = true
 [rerere]
   enabled = true
-[branch]
-  autosetupmerge = always

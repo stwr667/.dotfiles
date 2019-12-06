@@ -132,3 +132,6 @@ export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
 #####################################################################
 # Commenting out all RVM stuff since switching to rbenv.
 #####################################################################
+
+# Required for rbenv:
+eval "$(rbenv init -)"
