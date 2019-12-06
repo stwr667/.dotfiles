@@ -133,5 +133,8 @@ export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
 # Commenting out all RVM stuff since switching to rbenv.
 #####################################################################
 
+# Postgres commands like `psql`:
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.5/bin
+
 # Required for rbenv:
 eval "$(rbenv init -)"
