@@ -1,3 +1,7 @@
+# DEPRECATED!
+# See ~/.oh-my-zsh/  for this file equivalent. The changes are tracked in that separate git repo, i.e:
+# https://github.com/stwr667/ohmyzsh
+
 function get_region_and_rails_env() {
   if [[ "$PWD" =~ "workspace/website" ]]; then
     if [ "$RAILS_ENV" = "" ]; then
