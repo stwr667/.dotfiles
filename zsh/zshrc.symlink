@@ -111,6 +111,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Don't merge history for all closing tabs: https://stackoverflow.com/a/48873752/1852005
+unsetopt share_history
+
 #################################################################
 # END oh-my-zsh CONFIG
 #################################################################
@@ -132,6 +135,11 @@ export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
 #####################################################################
 # Commenting out all RVM stuff since switching to rbenv.
 #####################################################################
+
+# Required NVM setup (instructions from homebrew output after installing)
+export NVM_DIR="$HOME/.nvm"
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # Postgres commands like `psql`:
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.5/bin
