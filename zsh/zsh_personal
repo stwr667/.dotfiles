@@ -10,3 +10,8 @@ source $HOME/.dotfiles/zsh/zsh_aliases
 
 # Important for easy setting of terminal colours. Needed now for tig colours to work:
 export TERM=xterm-256color
+
+# Ignore all files ending with ORIG_HEAD when multiple files exist.
+# c.f: https://stackoverflow.com/questions/12508595/ignore-orig-head-in-zsh-git-autocomplete
+# This fixes the scenario when you type: `git reset --hard or<TAB>` becoming `git reset --hard orIG`
+zstyle ':completion:*:*' ignored-patterns '*ORIG_HEAD'
