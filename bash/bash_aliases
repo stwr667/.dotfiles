@@ -20,8 +20,8 @@ alias unc_applog='{ tail -f log/development.log & OBJC_DISABLE_INITIALIZE_FORK_S
 
 alias brs='bundle exec rails s'
 alias brc='bundle exec rails c'
-alias ssh-au='ssh agw-ap-jb1'
-alias ssh-us='ssh agw-us-jb1'
+alias ssh-au='ssh agw-jb-ap-southeast-2'
+alias ssh-us='ssh agw-jb-us-east-1'
 alias ssh-match-test='/usr/local/bin/ssh -J ubuntu@oss1-dev -i ~/.ssh/agworld-dev-syd.pem ec2-user@$(aws --region=ap-southeast-2 ec2 describe-instances --filters "Name=tag:Name,Values=matchbook-release-env" --output text --query "Reservations[*].Instances[*].NetworkInterfaces[*].PrivateIpAddresses[*].PrivateIpAddress")'
 alias ssh-unify-test='/usr/local/bin/ssh -J ubuntu@oss1-dev -i ~/.ssh/agworld-dev-syd.pem ec2-user@$(aws --region=ap-southeast-2 ec2 describe-instances --filters "Name=tag:Name,Values=unify-env" --output text --query "Reservations[*].Instances[*].NetworkInterfaces[*].PrivateIpAddresses[*].PrivateIpAddress")'
 alias ssh-geo-us-test='/usr/local/bin/ssh -J ubuntu@oss1-dev -i ~/.ssh/agworld-dev-syd.pem ubuntu@$(aws --region=ap-southeast-2 ec2 describe-instances --filters "Name=tag:Name,Values=release-us-geoserver-asg" --output text --query "Reservations[*].Instances[*].NetworkInterfaces[*].PrivateIpAddresses[*].PrivateIpAddress")'
