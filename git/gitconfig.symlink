@@ -39,3 +39,5 @@
   ff = true
 [rerere]
   enabled = true
+[oh-my-zsh]
+  hide-dirty = 1
