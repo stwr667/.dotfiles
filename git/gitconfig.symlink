@@ -36,7 +36,7 @@
 [difftool "diffmerge"]
   cmd = diffmerge $LOCAL $REMOTE
 [pull]
-  ff = true
+  ff = only
 [rerere]
   enabled = true
 [oh-my-zsh]
