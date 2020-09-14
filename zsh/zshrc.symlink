@@ -147,5 +147,8 @@ export NVM_DIR="$HOME/.nvm"
 # Postgres commands like `psql`:
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.5/bin
 
+# Add my personal executables to the path:
+export PATH=$PATH:$HOME/bin
+
 # Required for rbenv:
 eval "$(rbenv init -)"
