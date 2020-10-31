@@ -136,6 +136,10 @@ export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
 # Commenting out all RVM stuff since switching to rbenv.
 #####################################################################
 
+# Fix: Warning: Homebrew's sbin was not found in your PATH but you have installed formulae that put executables in
+# /usr/local/sbin.
+export PATH="/usr/local/sbin:$PATH"
+
 # Add imagemagick to the PATH for website for things like POSTing a layer, with an image:
 export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
 
