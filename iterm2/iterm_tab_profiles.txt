@@ -1,6 +1,6 @@
 == websiteTab ==
 Send text at start:
-ws
+ws; echo -e "\033]6;1;bg;blue;brightness;80\\a"; echo -e "\033]6;1;bg;red;brightness;80\\a"; echo -e "\033]6;1;bg;green;brightness;80\\a"
 
 == websiteDuplicateTab ==
 Send text at start:
