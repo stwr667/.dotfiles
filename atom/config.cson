@@ -69,6 +69,8 @@
   "linter-ui-default":
     alwaysTakeMinimumSpace: true
     showProviderName: true
+  "markdown-preview":
+    useGitHubStyle: true
   "toggle-quotes": {}
   welcome:
     showOnStartup: false
