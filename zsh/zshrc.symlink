@@ -154,5 +154,11 @@ export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/12/bin
 # Add my personal executables to the path:
 export PATH=$PATH:$HOME/bin
 
+# Required for Nix to work (c.f: https://github.com/agworld/website/tree/master/nix)
+. $HOME/.nix-profile/etc/profile.d/nix.sh
+
+# Required to get direnv working:
+eval "$(direnv hook zsh)"
+
 # Required for rbenv:
 eval "$(rbenv init -)"

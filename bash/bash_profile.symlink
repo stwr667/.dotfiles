@@ -120,6 +120,9 @@ export PATH=/Library/Frameworks/GDAL.framework/Programs:$PATH
 # ~ $ which ogr2ogr
 # /Applications/Postgres.app/Contents/Versions/latest/bin/ogr2ogr
 
+# Required for Nix to work (c.f: https://github.com/agworld/website/tree/master/nix)
+. $HOME/.nix-profile/etc/profile.d/nix.sh
+
 # rvm needs to be at the bottom of the file in case there are other lines in .[ba|z]shrc that redefine path:
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
