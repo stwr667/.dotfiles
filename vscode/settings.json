@@ -1,0 +1,33 @@
+{
+    "ruby.lint": {
+        "rubocop": {
+            "command": "rubocop",  // setting this will override automatic detection
+            "useBundler": true,
+            "lint": true, // enable lint cops
+            // "only": ["array", "of", "cops", "to", "run"],
+            "except": ["array", "of", "cops", "not", "to", "run"]
+            // "require": ["array", "of", "ruby", "files", "to", "require"],
+            // "rails": true // requires rubocop-rails gem for RuboCop >= 0.72.0
+          }
+    },
+    "editor.tabSize": 2,
+    "editor.wordWrapColumn": 120,
+    "files.trimTrailingWhitespace": true,
+    "files.trimFinalNewlines": true,
+    "eslint.packageManager": "yarn",
+    "eslint.run": "onSave",
+    "ruby.rubocop.suppressRubocopWarnings": true,
+    "editor.rulers": [
+        120
+    ],
+    "editor.scrollBeyondLastLine": false,
+    "workbench.editor.wrapTabs": true,
+    "sqltools.autoOpenSessionFiles": false,
+    "sqltools.highlightQuery": false,
+    "search.seedOnFocus": true,
+    "[sql]": {
+        "editor.defaultFormatter": "mtxr.sqltools"
+    },
+    "files.insertFinalNewline": true,
+    "security.workspace.trust.untrustedFiles": "open"
+}
