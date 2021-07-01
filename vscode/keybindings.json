@@ -47,5 +47,10 @@
   {
     "key": "cmd+k cmd+m",
     "command": "-workbench.extensions.action.showRecommendedKeymapExtensions"
+  },
+  {
+    "key": "shift+cmd+c",
+    "command": "-workbench.action.terminal.openNativeConsole",
+    "when": "!terminalFocus"
   }
 ]
