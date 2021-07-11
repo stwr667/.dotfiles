@@ -1,8 +1,12 @@
+##########################################################
+# NOTE: (July 2021): Just commented out the 2 commands below - they broke the up/down history in
+#                    irb or Rails consoles. But it seems they're no longer needed with zsh?! yay!
+##########################################################
 # Awesome settings to mean partial typing will filter the command history when pressing up or down
 # arrow up
-"\e[A":history-search-backward
+#"\e[A":history-search-backward
 # arrow down
-"\e[B":history-search-forward
+#"\e[B":history-search-forward
 
 set colored-stats on
 set mark-symlinked-directories on
