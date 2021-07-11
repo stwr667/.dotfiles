@@ -19,6 +19,8 @@ else # MacRuby
   end.new
 end
 
+AwesomePrint.irb!
+
 # Copy input onto Mac OS clipboard
 def pbcopy(input)
   str = input.to_s
