@@ -32,5 +32,6 @@
     "security.workspace.trust.untrustedFiles": "open",
     "gitlens.currentLine.enabled": false,
     "gitlens.hovers.currentLine.over": "line",
-    "gitlens.codeLens.enabled": false
+    "gitlens.codeLens.enabled": false,
+    "workbench.editor.decorations.colors": false
 }
