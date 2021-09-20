@@ -43,7 +43,7 @@
     disabledPackages: [
       "spell-check"
     ]
-    projectHome: "/Users/swrathal/code"
+    projectHome: "/Users/swrathal/workspace"
     telemetryConsent: "limited"
     themes: [
       "one-dark-ui"
