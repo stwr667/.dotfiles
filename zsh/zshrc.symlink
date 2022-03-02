@@ -77,7 +77,7 @@ plugins=(
 git
 bundler
 dotenv
-macos
+osx
 rake
 rbenv
 ruby
