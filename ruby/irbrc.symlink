@@ -4,6 +4,7 @@ require 'irb/ext/save-history'
 
 IRB.conf[:SAVE_HISTORY] = 200
 IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb-history"
+# IRB.conf[:USE_AUTOCOMPLETE] = false
 
 unless IRB.version.include?('DietRB')
   IRB::Irb.class_eval do
