@@ -4,9 +4,14 @@
 ##########################################################
 # Awesome settings to mean partial typing will filter the command history when pressing up or down
 # arrow up
-#"\e[A":history-search-backward
+"\e[A":history-search-backward
 # arrow down
-#"\e[B":history-search-forward
+"\e[B":history-search-forward
+
+# Function + Left
+"\e[H":beginning-of-line
+# Function + Right
+"\e[F":end-of-line
 
 set colored-stats on
 set mark-symlinked-directories on
