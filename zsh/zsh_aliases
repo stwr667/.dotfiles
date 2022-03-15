@@ -31,7 +31,7 @@ alias ssh-geo-us-test='/usr/local/bin/ssh -J ubuntu@oss1-dev -i ~/.ssh/agworld-d
 alias ssh-geo-au-test='/usr/local/bin/ssh -J ubuntu@oss1-dev -i ~/.ssh/agworld-dev-syd.pem ubuntu@$(aws --region=ap-southeast-2 ec2 describe-instances --filters "Name=tag:Name,Values=release-au-geoserver-asg" --output text --query "Reservations[*].Instances[*].NetworkInterfaces[*].PrivateIpAddresses[*].PrivateIpAddress")'
 alias dbtest='dropdb agworld_test; DISABLE_DATABASE_ENVIRONMENT_CHECK=1 RAILS_ENV=test bundle exec rake db:setup --trace'
 alias dbtestpd='dropdb pipe_dream_test; RAILS_ENV=test bundle exec rake db:test:prepare'
-alias rspc='RAILS_ENV=test NO_COVERAGE=true bundle exec rspec --tag focus --format documentation -c'
+alias rspc='RAILS_ENV=test NO_COVERAGE=true bundle exec rspec --format documentation -c'
 alias spring_svr='spring server | grep -v "\[watcher:test] watcher: add:"'
 alias rspc_master='RAILS_ENV=test NO_COVERAGE=true git diff --name-only origin/master... spec/**/*.rb | grep -v factories | xargs -p bundle exec rspec -fd'
 alias spring_master='git diff --name-only origin/master... spec/**/*.rb | grep -v factories | xargs -p spring rspec -fd'
