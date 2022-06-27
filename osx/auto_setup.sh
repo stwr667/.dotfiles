@@ -1,6 +1,6 @@
 # Sets reasonable OS X defaults.
 #
-# Or, in other words, set shit how I like in OS X.
+# Or, in other words, set stuff how I like in OS X.
 #
 # The original idea (and a couple settings) were grabbed from:
 #   https://github.com/mathiasbynens/dotfiles/blob/master/.osx
@@ -24,8 +24,8 @@ defaults write -g InitialKeyRepeat -int 15    # normal minimum is 15 (225 ms)
 defaults write -g KeyRepeat -int 2            # normal minimum is 2 (30 ms)
 
 # Set the Finder prefs for showing a few different volumes on the Desktop.
-defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+# defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+# defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
 # Shot all dot files in finder
 defaults write com.apple.finder AppleShowAllFiles -bool YES

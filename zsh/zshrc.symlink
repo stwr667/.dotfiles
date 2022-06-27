@@ -118,9 +118,10 @@ unsetopt share_history
 # END oh-my-zsh CONFIG
 #################################################################
 
-export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
-export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
-export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
+# Don't think these are needed any more?
+# export LDFLAGS="-L/usr/local/opt/openssl@1.1/lib"
+# export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include"
+# export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
 
 #####################################################################
 # Commenting out all RVM stuff since switching to rbenv.
@@ -138,27 +139,10 @@ export PKG_CONFIG_PATH="/usr/local/opt/openssl@1.1/lib/pkgconfig"
 
 # Fix: Warning: Homebrew's sbin was not found in your PATH but you have installed formulae that put executables in
 # /usr/local/sbin.
-export PATH="/usr/local/sbin:$PATH"
-
-# Add imagemagick to the PATH for website for things like POSTing a layer, with an image:
-export PATH="/usr/local/opt/imagemagick@6/bin:$PATH"
-
-# Required NVM setup (instructions from homebrew output after installing)
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+# export PATH="/usr/local/sbin:$PATH"
 
 # Postgres commands like `psql`:
-export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/12/bin
+# export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/12/bin
 
 # Add my personal executables to the path:
 export PATH=$PATH:$HOME/bin
-
-# Required for Nix to work (c.f: https://github.com/agworld/website/tree/master/nix)
-. $HOME/.nix-profile/etc/profile.d/nix.sh
-
-# Required to get direnv working:
-eval "$(direnv hook zsh)"
-
-# Required for rbenv:
-eval "$(rbenv init -)"
