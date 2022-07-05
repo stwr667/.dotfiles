@@ -156,6 +156,9 @@ export PATH=/opt/homebrew/opt/python@3.9/libexec/bin:$PATH
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
 
+# Add project bin directory to path, as per dev setup instructions:
+export PATH="$HOME/src/barrel/bin:$PATH"
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -163,3 +166,6 @@ export NVM_DIR="$HOME/.nvm"
 # Installed Shell integration with iterm2, so that it can alert me when a long command finishes.
 # See: https://stackoverflow.com/a/41667800/1852005
 test -e /Users/swrathall/.iterm2_shell_integration.zsh && source /Users/swrathall/.iterm2_shell_integration.zsh || true
+
+# Add command completiong for `cw` cloudwatch tailing tool - see: brew info cw
+source /opt/homebrew/share/zsh/site-functions/cw.zsh
