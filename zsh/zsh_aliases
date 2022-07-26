@@ -25,3 +25,6 @@ alias allservers='cat ~/.ssh/config | grep "Host "'
 # alias pip='/usr/local/bin/pip3'
 alias kcuc='kubectl config use-context'
 alias kccc='kubectl config current-context'
+# Dev jumpbox:
+alias ssh_dev='ssh 10.176.31.239'
+alias ssh_dev_root='ssh -i ~/.ssh/cloud-addons-jumpbox-dev-keypair.pem ec2-user@10.176.31.239'
