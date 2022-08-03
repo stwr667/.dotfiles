@@ -1,4 +1,5 @@
 alias ws='cd ~/src/barrel'
+alias a4c='cd ~/src/automation-for-confluence/packages/forge-app'
 alias be='bundle exec'
 alias gs='git status'
 alias gd='git diff'
@@ -28,3 +29,6 @@ alias kccc='kubectl config current-context'
 # Dev jumpbox:
 alias ssh_dev='ssh 10.176.31.239'
 alias ssh_dev_root='ssh -i ~/.ssh/cloud-addons-jumpbox-dev-keypair.pem ec2-user@10.176.31.239'
+alias e-d='export FORGE_GRAPHQL_GATEWAY='
+alias e-s='export FORGE_GRAPHQL_GATEWAY=https://api-private.stg.atlassian.com/graphql'
+alias e-p='export FORGE_GRAPHQL_GATEWAY=https://api.atlassian.com/graphql'
