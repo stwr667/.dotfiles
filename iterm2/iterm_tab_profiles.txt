@@ -21,3 +21,12 @@ ws; echo -e "\033]6;1;bg;red;brightness;255\\a"; echo -e "\033]6;1;bg;blue;brigh
 == pipeDreamTab ==
 Send text at start:
 cd ~/workspace/pipe_dream; echo -e "\033]6;1;bg;blue;brightness;255\\a"; echo -e "\033]6;1;bg;red;brightness;100\\a"; echo -e "\033]6;1;bg;green;brightness;100\\a"; source ./config/overrides.sh
+
+
+== websiteTab (Barrel) ==
+Send text at start:
+ws; echo -e "\033]6;1;bg;blue;brightness;80\\a"; echo -e "\033]6;1;bg;red;brightness;80\\a"; echo -e "\033]6;1;bg;green;brightness;80\\a"
+
+== forgeTab ==
+Send text at start:
+a4c; e-s; echo -e "\033]6;1;bg;blue;brightness;79\\a"; echo -e "\033]6;1;bg;red;brightness;240\\a"; echo -e "\033]6;1;bg;green;brightness;220\\a"
