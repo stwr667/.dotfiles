@@ -15,6 +15,3 @@ export TERM=xterm-256color
 # c.f: https://stackoverflow.com/questions/12508595/ignore-orig-head-in-zsh-git-autocomplete
 # This fixes the scenario when you type: `git reset --hard or<TAB>` becoming `git reset --hard orIG`
 zstyle ':completion:*:*' ignored-patterns '*ORIG_HEAD'
-
-# Safe to commit. Dev token:
-export TF_VAR_signalfx_auth_token=quCCkcGBG8W-3aQMcjSY7g
