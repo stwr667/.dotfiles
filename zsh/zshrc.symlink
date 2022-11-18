@@ -169,3 +169,7 @@ test -e /Users/swrathall/.iterm2_shell_integration.zsh && source /Users/swrathal
 
 # Add command completiong for `cw` cloudwatch tailing tool - see: brew info cw
 source /opt/homebrew/share/zsh/site-functions/cw.zsh
+
+# begin forge completion
+. <(forge --completion)
+# end forge completion
