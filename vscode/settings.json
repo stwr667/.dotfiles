@@ -35,7 +35,7 @@
     "gitlens.codeLens.enabled": false,
     "workbench.editor.decorations.colors": false,
     "yaml.schemas": {
-        "file:///Users/swrathall/.vscode/extensions/atlassian.atlascode-2.10.12/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/steve/.vscode/extensions/atlassian.atlascode-3.0.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
     "redhat.telemetry.enabled": false,
     "atlascode.bitbucket.explorer.notifications.pullRequestCreated": false,

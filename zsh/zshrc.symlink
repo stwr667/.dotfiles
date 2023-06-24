@@ -152,9 +152,12 @@ export PATH=$PATH:/Applications/p4merge.app/Contents/MacOS/
 # Prepend python utilities to Path. See `brew info python` for more info:
 export PATH=/opt/homebrew/opt/python@3.9/libexec/bin:$PATH
 
-# jenv post-install instructions from brew:
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+if [ `hostname` = "StephensMacBookAir.local" ]; then
+    echo "Not loading Atlassian shell..."
+else
+    echo "Loading Atlassian shell..."
+    source $HOME/.dotfiles/zsh/zsh_atlassian
+fi
 
 # Add project bin directory to path, as per dev setup instructions:
 export PATH="$HOME/src/barrel/bin:$PATH"
@@ -166,10 +169,3 @@ export NVM_DIR="$HOME/.nvm"
 # Installed Shell integration with iterm2, so that it can alert me when a long command finishes.
 # See: https://stackoverflow.com/a/41667800/1852005
 test -e /Users/swrathall/.iterm2_shell_integration.zsh && source /Users/swrathall/.iterm2_shell_integration.zsh || true
-
-# Add command completiong for `cw` cloudwatch tailing tool - see: brew info cw
-source /opt/homebrew/share/zsh/site-functions/cw.zsh
-
-# begin forge completion
-. <(forge --completion)
-# end forge completion

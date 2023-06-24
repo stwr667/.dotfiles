@@ -1,0 +1,12 @@
+# ZSH shell commands related to Atlassian work-required stuff
+
+# jenv post-install instructions from brew:
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+
+# Add command completiong for `cw` cloudwatch tailing tool - see: brew info cw
+source /opt/homebrew/share/zsh/site-functions/cw.zsh
+
+# begin forge completion
+. <(forge --completion)
+# end forge completion
