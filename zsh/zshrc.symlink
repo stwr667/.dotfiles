@@ -140,9 +140,6 @@ unsetopt share_history
 # /usr/local/sbin.
 # export PATH="/usr/local/sbin:$PATH"
 
-# Postgres commands like `psql`:
-# export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/12/bin
-
 # Add my personal executables to the path:
 export PATH=$PATH:$HOME/bin
 
@@ -154,6 +151,8 @@ export PATH=/opt/homebrew/opt/python@3.9/libexec/bin:$PATH
 
 if [ `hostname` = "StephensMacBookAir.local" ]; then
     echo "Not loading Atlassian shell..."
+    # Postgres commands like `psql`:
+    export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/11/bin
 else
     echo "Loading Atlassian shell..."
     source $HOME/.dotfiles/zsh/zsh_atlassian
