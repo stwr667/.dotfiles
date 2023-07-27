@@ -149,6 +149,18 @@ export PATH=$PATH:/Applications/p4merge.app/Contents/MacOS/
 # Prepend python utilities to Path. See `brew info python` for more info:
 export PATH=/opt/homebrew/opt/python@3.9/libexec/bin:$PATH
 
+#########################################################
+# Begin NVM Commands
+#########################################################
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Call script to set the right node based on .nvmrc:
+source $HOME/.dotfiles/zsh/zsh_autoread_nvmrc.sh
+#########################################################
+# End NVM Commands
+#########################################################
+
 if [ `hostname` = "StephensMacBookAir.local" ]; then
     echo "Not loading Atlassian shell..."
     # Postgres commands like `psql`:
@@ -160,10 +172,6 @@ fi
 
 # Add project bin directory to path, as per dev setup instructions:
 export PATH="$HOME/src/barrel/bin:$PATH"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Installed Shell integration with iterm2, so that it can alert me when a long command finishes.
 # See: https://stackoverflow.com/a/41667800/1852005
