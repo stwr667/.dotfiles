@@ -1,4 +1,5 @@
 {
+    "workbench.colorTheme": "Default Dark Modern",
     "ruby.lint": {
         "rubocop": {
             "command": "rubocop",  // setting this will override automatic detection
@@ -35,7 +36,7 @@
     "gitlens.codeLens.enabled": false,
     "workbench.editor.decorations.colors": false,
     "yaml.schemas": {
-        "file:///Users/steve/.vscode/extensions/atlassian.atlascode-3.0.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+        "file:///Users/swrathall/.vscode/extensions/atlassian.atlascode-3.0.3/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
     },
     "redhat.telemetry.enabled": false,
     "atlascode.bitbucket.explorer.notifications.pullRequestCreated": false,
@@ -73,5 +74,6 @@
     ],
     "aws.suppressPrompts": {
         "regionAddAutomatically": true
-    }
+    },
+    "workbench.startupEditor": "none"
 }
