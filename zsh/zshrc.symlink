@@ -164,7 +164,7 @@ source $HOME/.dotfiles/zsh/zsh_autoread_nvmrc.sh
 if [ `hostname` = "StephensMacBookAir.local" ]; then
     echo "Not loading Atlassian shell..."
     # Postgres commands like `psql`:
-    export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/11/bin
+    export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/15/bin
 else
     echo "Loading Atlassian shell..."
     source $HOME/.dotfiles/zsh/zsh_atlassian
