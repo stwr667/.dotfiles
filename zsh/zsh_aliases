@@ -10,6 +10,10 @@ alias gl-pretty='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=sh
 alias gb-recent='for ref in $(git for-each-ref --sort=-committerdate --format="%(refname)" refs/heads/ refs/remotes ); do git log -n1 $ref --pretty=format:"%Cgreen%cr%Creset %C(yellow)%d%Creset %C(bold blue)<%an>%Creset%n" | cat ; done | awk '"'! a["'$0'"]++'"
 alias clear-rerere='rm -rf .git/rr-cache'
 alias la='ls -al'
+# This disabled default buffering of the pipe | command when used as a prefix.
+# See https://unix.stackexchange.com/a/61833/414395.
+# E.g: script -q /dev/null devLogs.js | grep -v "SecretsServiceJdbcDetailsProvider"
+alias buffer-disable='script -q /dev/null'
 
 alias brs='bundle exec rails s'
 alias brc='bundle exec rails c'
