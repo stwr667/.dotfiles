@@ -4,6 +4,9 @@
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
 
+export JAVA_HOME="$(jenv prefix)"
+
+
 # Add command completiong for `cw` cloudwatch tailing tool - see: brew info cw
 source /opt/homebrew/share/zsh/site-functions/cw.zsh
 
