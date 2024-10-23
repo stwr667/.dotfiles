@@ -6,7 +6,7 @@ $HOME/src/pm2-automation
 $HOME/src/cdss-scripts
 )
 SINCE_NUM_WEEKS_AGO=4
-MAX_NUM_COMMITS=10
+MAX_NUM_COMMITS=25
 echo "####################################################"
 echo "####################################################"
 echo "Showing logs across repos in the last $SINCE_NUM_WEEKS_AGO weeks, max commits: $MAX_NUM_COMMITS"

@@ -1,4 +1,5 @@
 alias ws='cd ~/src/barrel'
+alias dw='devWatch.js'
 alias a4c='cd ~/src/automation-for-confluence/packages/forge-app'
 alias be='bundle exec'
 alias gs='git status'
