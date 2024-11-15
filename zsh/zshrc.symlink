@@ -171,7 +171,7 @@ else
 fi
 
 # Add project bin directory to path, as per dev setup instructions:
-export PATH="$HOME/src/barrel/bin:$PATH"
+export PATH="$HOME/src/atlassian/barrel/bin:$PATH"
 
 # Installed Shell integration with iterm2, so that it can alert me when a long command finishes.
 # See: https://stackoverflow.com/a/41667800/1852005

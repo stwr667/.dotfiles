@@ -1,9 +1,9 @@
-REPOS=($HOME/src/barrel
-$HOME/src/barrel-rack
-$HOME/src/automation-monitoring
-$HOME/src/automation-provisioner
-$HOME/src/pm2-automation
-$HOME/src/cdss-scripts
+REPOS=($HOME/src/atlassian/barrel
+$HOME/src/atlassian/barrel-rack
+$HOME/src/atlassian/automation-monitoring
+$HOME/src/atlassian/automation-provisioner
+$HOME/src/atlassian/pm2-automation
+$HOME/src/atlassian/cdss-scripts
 )
 SINCE_NUM_WEEKS_AGO=4
 MAX_NUM_COMMITS=25
@@ -21,7 +21,7 @@ done
 
 
 # Original script, from https://stackoverflow.com/a/50883219/1852005
-#CODE_BASE=($HOME/src/
+#CODE_BASE=($HOME/src/atlassian/
 #)
 #EXCLUDE_REPO_REGEX="gitRepoYouWantToIgnore" #this is regex
 #
