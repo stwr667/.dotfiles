@@ -82,6 +82,13 @@ rbenv
 ruby
 )
 
+# https://unix.stackexchange.com/a/767325/414395
+# Skip only the aliases from the git plugin
+# zstyle ':omz:plugins:git' aliases no
+#
+# Skip all aliases, in lib files and enabled plugins
+zstyle ':omz:*' aliases no
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
