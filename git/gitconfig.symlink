@@ -40,3 +40,8 @@
   enabled = true
 [oh-my-zsh]
   hide-dirty = 1
+[trace2]
+	eventTarget = af_unix:/Users/swrathall/.gittrace/trace.sock
+	eventBrief = true
+	eventNesting = 1
+	configparams = custom.metacommands
