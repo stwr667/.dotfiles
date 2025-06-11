@@ -8,7 +8,8 @@ alias gds='git diff --staged'
 alias gdd='git diff --color-words=.'
 alias gl='git log'
 alias gl-pretty='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=short'
-alias gl-merges='git log --first-parent master --oneline'
+# You can also add the --merges switch, but in BB, when you Squash+Merge, it makes it a normal non-merge commit. So we won't:
+alias gl-merges='git log --first-parent --oneline'
 alias gb-recent='for ref in $(git for-each-ref --sort=-committerdate --format="%(refname)" refs/heads/ refs/remotes ); do git log -n1 $ref --pretty=format:"%Cgreen%cr%Creset %C(yellow)%d%Creset %C(bold blue)<%an>%Creset%n" | cat ; done | awk '"'! a["'$0'"]++'"
 alias clear-rerere='rm -rf .git/rr-cache'
 alias la='ls -al'
