@@ -1,5 +1,6 @@
 alias ws='cd ~/src/atlassian/barrel'
 alias dw='devWatch.js'
+alias ddc='devCompose frontend backend'
 alias a4c='cd ~/src/atlassian/automation-for-confluence/packages/forge-app'
 alias be='bundle exec'
 alias gs='git status'
