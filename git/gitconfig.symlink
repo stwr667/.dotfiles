@@ -26,14 +26,14 @@
 [mergetool "p4merge"]
 #  cmd = p4merge $BASE $LOCAL $REMOTE $MERGED
 # This command opens the mergetool view + 2 diffs of the base to local & remote. It waits for all to close:
-  cmd = p4merge $BASE $LOCAL $REMOTE $MERGED & diffmerge $BASE $LOCAL & diffmerge $BASE $REMOTE & wait
+  cmd = p4merge $BASE $LOCAL $REMOTE $MERGED & code --diff $BASE $LOCAL & code --diff $BASE $REMOTE & wait
   trustExitCode = false
   keepTemporaries = false
   keepBackup = false
 [diff]
-  tool = diffmerge
-[difftool "diffmerge"]
-  cmd = diffmerge $LOCAL $REMOTE
+  tool = vscodeDiff
+[difftool "vscodeDiff"]
+  cmd = code --diff $LOCAL $REMOTE
 [pull]
   rebase = false
 [rerere]
