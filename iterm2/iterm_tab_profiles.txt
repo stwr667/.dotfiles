@@ -1,3 +1,5 @@
+# NOTE: You can export all profiles in iterm as JSON. Quicker than doing this manually.
+
 == websiteTab ==
 Send text at start:
 ws; echo -e "\033]6;1;bg;blue;brightness;80\\a"; echo -e "\033]6;1;bg;red;brightness;80\\a"; echo -e "\033]6;1;bg;green;brightness;80\\a"

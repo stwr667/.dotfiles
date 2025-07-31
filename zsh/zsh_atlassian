@@ -9,9 +9,8 @@ export JAVA_HOME="$(jenv prefix)"
 # Some orbit setting needed - Probably don't need it, but it was generated:
 export PATH="/Users/swrathall/.orbit/bin:$PATH"
 
+# New laptop added this during setup of `atlas`. Perhaps it's a new location now:
+export PATH="/opt/atlassian/bin:$PATH"
+
 # Add command completiong for `cw` cloudwatch tailing tool - see: brew info cw
 source /opt/homebrew/share/zsh/site-functions/cw.zsh
-
-# begin forge completion
-. <(forge --completion)
-# end forge completion
