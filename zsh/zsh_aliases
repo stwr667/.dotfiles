@@ -1,6 +1,6 @@
 alias ws='cd ~/src/atlassian/barrel'
 alias dw='devWatch.js'
-alias ddc='devCompose frontend backend'
+alias ddc='devCompose frontend backend --tui=false'
 alias a4c='cd ~/src/atlassian/automation-for-confluence/packages/forge-app'
 alias be='bundle exec'
 alias gs='git status'
@@ -12,7 +12,7 @@ alias gl-pretty='git log --pretty=format:"%h %ad | %s%d [%an]" --graph --date=sh
 # You can also add the --merges switch, but in BB, when you Squash+Merge, it makes it a normal non-merge commit. So we won't:
 alias gl-merges='git log --first-parent --oneline'
 alias gb-recent='for ref in $(git for-each-ref --sort=-committerdate --format="%(refname)" refs/heads/ refs/remotes ); do git log -n1 $ref --pretty=format:"%Cgreen%cr%Creset %C(yellow)%d%Creset %C(bold blue)<%an>%Creset%n" | cat ; done | awk '"'! a["'$0'"]++'"
-alias clear-rerere='rm -rf .git/rr-cache'
+alias open-git-files="git status | grep modified | awk '{print \$2}' | xargs idea"
 alias la='ls -al'
 # This disabled default buffering of the pipe | command when used as a prefix.
 # See https://unix.stackexchange.com/a/61833/414395.
