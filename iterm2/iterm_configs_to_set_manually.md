@@ -7,3 +7,8 @@ https://apple.stackexchange.com/a/293988/355234
 
 # Switch tabs keyboard shortcut settings:
 https://apple.stackexchange.com/a/379733/355234
+
+# Show hidden (dot files) by default:
+```
+defaults write com.apple.finder AppleShowAllFiles -bool true
+```
