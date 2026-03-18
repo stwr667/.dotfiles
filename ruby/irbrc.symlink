@@ -1,9 +1,13 @@
 require 'rubygems'
-require 'awesome_print'
-require 'irb/ext/save-history'
+require 'amazing_print'
 
-IRB.conf[:SAVE_HISTORY] = 200
-IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb-history"
+# Commenting these out for now due to this error:
+# 'Kernel.require': cannot load such file -- irb/ext/save-history (LoadError)
+# It doesn't look like they're really needed any more anyway.
+# require 'irb/ext/save-history'
+
+# IRB.conf[:SAVE_HISTORY] = 200
+# IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb-history"
 # IRB.conf[:USE_AUTOCOMPLETE] = false
 
 unless IRB.version.include?('DietRB')
@@ -20,7 +24,7 @@ else # MacRuby
   end.new
 end
 
-AwesomePrint.irb!
+AmazingPrint.irb!
 
 # Copy input onto Mac OS clipboard
 def pbcopy(input)
