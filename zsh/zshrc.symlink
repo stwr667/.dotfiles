@@ -145,6 +145,9 @@ export PATH=$PATH:/Applications/p4merge.app/Contents/MacOS/
 # Prepend python utilities to Path. See `brew info python` for more info:
 export PATH=/opt/homebrew/opt/python@3.10/libexec/bin:$PATH
 
+# Add ~/.local/bin to the path - requested by claude codegen, and generally a good place to put user-installed executables:
+export PATH="$HOME/.local/bin:$PATH"
+
 #########################################################
 # Begin NVM Commands
 #########################################################
