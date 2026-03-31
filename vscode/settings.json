@@ -1,5 +1,5 @@
 {
-    "workbench.colorTheme": "Default Dark Modern",
+    "workbench.colorTheme": "Dark Modern",
     "ruby.lint": {
         "rubocop": {
             "command": "rubocop",  // setting this will override automatic detection

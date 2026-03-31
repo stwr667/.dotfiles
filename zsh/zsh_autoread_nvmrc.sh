@@ -15,9 +15,14 @@ load-nvmrc() {
   if [ -n "$nvmrc_path" ]; then
     local nvmrc_node_version
     nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+    echo "Using node version from .nvmrc: $nvmrc_node_version"
 
     if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
+      # Instead of just blindly installing the node version, ask the user:
+      read "answer?Node version specified in .nvmrc is not installed. Do you want to install it? (y/N) "
+      if [[ "$answer" =~ ^[Yy]$ ]]; then
+        nvm install
+      fi
     elif [ "$nvmrc_node_version" != "$(nvm version)" ]; then
       nvm use
     fi
