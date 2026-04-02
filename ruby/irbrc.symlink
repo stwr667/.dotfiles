@@ -1,5 +1,4 @@
 require 'rubygems'
-require 'amazing_print'
 
 # Commenting these out for now due to this error:
 # 'Kernel.require': cannot load such file -- irb/ext/save-history (LoadError)
@@ -13,7 +12,7 @@ require 'amazing_print'
 unless IRB.version.include?('DietRB')
   IRB::Irb.class_eval do
     def output_value
-      ap @context.last_value
+      pp @context.last_value
     end
   end
 else # MacRuby
@@ -24,7 +23,25 @@ else # MacRuby
   end.new
 end
 
-AmazingPrint.irb!
+begin
+  require "amazing_print"
+  AmazingPrint.irb!
+rescue LoadError
+  begin
+    # Temporarily escape Bundler to find the real gem path (because Rails apps will restrict against global gems)
+    global_path = Bundler.with_unbundled_env { `gem which amazing_print 2>/dev/null`.strip }
+
+    if global_path.empty?
+      puts "amazing_print gem not found in global gems. Please install it with 'gem install amazing_print' or add it to your Gemfile."
+    else
+      $LOAD_PATH.unshift(File.dirname(global_path))
+      require "amazing_print"
+      AmazingPrint.irb!
+    end
+  rescue LoadError => e
+    puts "Error loading amazing_print: #{e.message}"
+  end
+end
 
 # Copy input onto Mac OS clipboard
 def pbcopy(input)
