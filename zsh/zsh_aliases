@@ -40,3 +40,5 @@ alias ssh_dev_root='ssh -i ~/.ssh/cloud-addons-jumpbox-dev-keypair.pem ec2-user@
 alias e-d='export FORGE_GRAPHQL_GATEWAY='
 alias e-s='export FORGE_GRAPHQL_GATEWAY=https://api-private.stg.atlassian.com/graphql'
 alias e-p='export FORGE_GRAPHQL_GATEWAY=https://api.atlassian.com/graphql'
+# From: https://github.com/gdubw/gng to always pick the right gradle:
+alias gradle=gw
