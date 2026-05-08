@@ -75,5 +75,16 @@
     "aws.suppressPrompts": {
         "regionAddAutomatically": true
     },
-    "workbench.startupEditor": "none"
+    "workbench.startupEditor": "none",
+    "gitlens.ai.model": "vscode",
+    "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+    "gitlens.blame.format": "${author|12-} ${agoOrDate|14-}",
+    "gitlens.heatmap.hotColor": "#ffffff",
+    "gitlens.heatmap.coldColor": "#0a1af6",
+    "workbench.settings.applyToAllProfiles": [
+        "gitlens.heatmap.coldColor",
+        "gitlens.heatmap.hotColor",
+        "gitlens.heatmap.ageThreshold"
+    ],
+    "gitlens.heatmap.ageThreshold": 365
 }
