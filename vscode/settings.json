@@ -87,7 +87,7 @@
         "gitlens.heatmap.ageThreshold"
     ],
     "gitlens.heatmap.ageThreshold": 365,
-    "claudeCode.preferredLocation": "panel",
+    "claudeCode.preferredLocation": "sidebar",
     "gitlens.blame.highlight.locations": [
         "gutter",
         "overview"
