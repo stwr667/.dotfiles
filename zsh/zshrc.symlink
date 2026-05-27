@@ -175,3 +175,37 @@ export PATH="$HOME/src/atlassian/barrel/bin:$PATH"
 # Installed Shell integration with iterm2, so that it can alert me when a long command finishes.
 # See: https://stackoverflow.com/a/41667800/1852005
 test -e /Users/swrathall/.iterm2_shell_integration.zsh && source /Users/swrathall/.iterm2_shell_integration.zsh || true
+
+if true || [ `whoami` = "stephen.wrathallvaliant.finance" ]; then
+echo "Loading Valiant-specific shell..."
+### BEGIN Valiant ZSH ###
+# Managed by `bin/bootstrap`.
+eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(rbenv init -)"
+eval "$(nodenv init -)"
+
+# Default database configuration (for psql and other tools).
+export PGHOST=postgres
+export PGUSER=valiant
+export PGDATABASE=valiant_development
+export PGPASSWORD=valiant!
+
+# Add libpq binaries required for building the `pg` gem.
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+# Add postgres binaries required for running the database and `psql`.
+export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
+
+# Fix for MacOS forking issues when connecting to postgres in docker.
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
+# Ensure YJIT is enabled for ruby by default.
+export RUBY_YJIT_ENABLE=1
+
+# Valiant CLI shortcut.
+alias v="just"
+
+### END Valiant ZSH ###
+else
+echo "Not loading Valiant-specific shell..."
+fi
