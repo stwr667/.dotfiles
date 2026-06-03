@@ -91,5 +91,6 @@
     "gitlens.blame.highlight.locations": [
         "gutter",
         "overview"
-    ]
+    ],
+    "gitlens.hovers.enabled": false
 }

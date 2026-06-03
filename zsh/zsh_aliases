@@ -39,3 +39,8 @@ alias e-s='export FORGE_GRAPHQL_GATEWAY=https://api-private.stg.atlassian.com/gr
 alias e-p='export FORGE_GRAPHQL_GATEWAY=https://api.atlassian.com/graphql'
 # From: https://github.com/gdubw/gng to always pick the right gradle:
 alias gradle=gw
+
+# Generate a magic link for valiant platform for the given email address, and print it to the console:
+vauth () {
+  bundle exec rake platform:magic_link email=$1 version=2
+}
