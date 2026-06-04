@@ -92,5 +92,6 @@
         "gutter",
         "overview"
     ],
-    "gitlens.hovers.enabled": false
+    "gitlens.hovers.enabled": false,
+    "rest-client.previewOption": "exchange"
 }
