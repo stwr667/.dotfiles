@@ -16,7 +16,7 @@
   user = stwr667
 [merge]
   keepBackup = false;
-  tool = p4merge
+  tool = vsCodeMerge
   defaultToUpstream = true
 [push]
   default = upstream
@@ -27,6 +27,11 @@
 #  cmd = p4merge $BASE $LOCAL $REMOTE $MERGED
 # This command opens the mergetool view + 2 diffs of the base to local & remote. It waits for all to close:
   cmd = p4merge $BASE $LOCAL $REMOTE $MERGED & code --diff $BASE $LOCAL & code --diff $BASE $REMOTE & wait
+  trustExitCode = false
+  keepTemporaries = false
+  keepBackup = false
+[mergetool "vsCodeMerge"]
+  cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED & code --diff $BASE $LOCAL & code --diff $BASE $REMOTE & wait
   trustExitCode = false
   keepTemporaries = false
   keepBackup = false
