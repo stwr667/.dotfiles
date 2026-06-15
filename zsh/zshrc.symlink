@@ -96,6 +96,19 @@ zstyle ':omz:*' aliases no
 
 source $ZSH/oh-my-zsh.sh
 
+# SW: Claude addition: so that .env.local can override .env files:
+# Layer .env.local on top of the OMZ dotenv plugin (which only sources .env).
+# Registered after oh-my-zsh, so this chpwd hook runs after the plugin's, letting
+# .env.local re-declare and override values from .env (e.g. a personal TZ).
+_source_env_local() {
+  [[ -f .env.local ]] || return
+  setopt localoptions allexport
+  source ./.env.local
+}
+autoload -U add-zsh-hook
+add-zsh-hook chpwd _source_env_local
+_source_env_local
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
