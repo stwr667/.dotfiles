@@ -93,5 +93,8 @@
         "overview"
     ],
     "rest-client.previewOption": "exchange",
+    // Required for the httpYac extension to honour the QuotaGuard proxy that the valiant repo's
+    // httpyac.config.js applies to HTTP requests:
+    "http.proxySupport": "on",
     "gitlens.hovers.currentLine.enabled": false
 }
