@@ -1,5 +1,6 @@
 alias ws='cd ~/Projects/valiant'
 alias be='bundle exec'
+alias br='bin/rails'
 alias gs='git status'
 alias gd='git diff'
 alias gds='git diff --staged'
