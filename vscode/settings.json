@@ -96,5 +96,14 @@
     // Required for the httpYac extension to honour the QuotaGuard proxy that the valiant repo's
     // httpyac.config.js applies to HTTP requests:
     "http.proxySupport": "on",
-    "gitlens.hovers.currentLine.enabled": false
+    "gitlens.hovers.currentLine.enabled": false,
+    "mermaidChart.showGenerateDiagramCodeLens": false,
+    "chat.viewSessions.orientation": "stacked",
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+        "ruby": true
+    }
 }
