@@ -19,6 +19,7 @@ alias buffer-disable='script -q /dev/null'
 
 alias brs='bin/rails s'
 alias brc='bin/rails c'
+alias sk='BUCK_PUSH_ENABLED=false BUCK_PULL_ENABLED=false br worker:go' # SideKiq workers
 alias dbtest='dropdb agworld_test; DISABLE_DATABASE_ENVIRONMENT_CHECK=1 RAILS_ENV=test bin/rake db:setup --trace'
 alias dbtestpd='dropdb pipe_dream_test; RAILS_ENV=test bin/rake db:test:prepare'
 alias rspc='RAILS_ENV=test NO_COVERAGE=true bin/rspec --format documentation -c'
