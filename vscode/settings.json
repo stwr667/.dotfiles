@@ -105,5 +105,6 @@
         "markdown": false,
         "scminput": false,
         "ruby": true
-    }
+    },
+    "workbench.browser.openLocalhostLinks": false
 }
