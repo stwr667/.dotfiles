@@ -126,5 +126,7 @@
         "workspaceSymbol": true,
         "signatureHelp": true,
         "typeHierarchy": true
-    }
+    },
+    "livePreview.portNumber": 3100,
+    "livePreview.notifyOnOpenLooseFile": false
 }
