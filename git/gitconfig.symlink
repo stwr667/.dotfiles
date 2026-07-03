@@ -19,7 +19,7 @@
   tool = vsCodeMerge
   defaultToUpstream = true
 [push]
-  default = upstream
+  default = simple
 [mergetool "diffmerge"]
   cmd = diffmerge --merge --result=$MERGED $LOCAL $BASE $REMOTE
   trustExitCode = true
