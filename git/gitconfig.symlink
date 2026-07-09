@@ -20,6 +20,8 @@
   defaultToUpstream = true
 [push]
   default = simple
+[branch]
+  autoSetupMerge = simple
 [mergetool "diffmerge"]
   cmd = diffmerge --merge --result=$MERGED $LOCAL $BASE $REMOTE
   trustExitCode = true
