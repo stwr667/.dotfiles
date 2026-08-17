@@ -5,6 +5,7 @@
   co = checkout
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
   unpushed = log --branches --not --remotes --simplify-by-decoration --decorate --oneline
+  ignored-local = !git ls-files -v | grep \"^[a-z]\"
 [color]
   ui = true
 [credential]
