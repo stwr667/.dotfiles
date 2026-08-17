@@ -130,5 +130,7 @@
     "editor.copyWithSyntaxHighlighting": false,
     "files.associations": {
         "*.just": "shellscript"
-    }
+    },
+    "peacock.affectActivityBar": false,
+    "peacock.affectStatusBar": false
 }
