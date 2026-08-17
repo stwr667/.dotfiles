@@ -1,7 +1,10 @@
 alias ws='cd ~/Projects/valiant'
 alias be='bundle exec'
 alias br='bin/rails'
-alias bk='bin/rake'
+alias jar='just au rails'
+alias jer='just eu rails'
+alias jak='just au rake'
+alias jek='just eu rake'
 alias bd='bin/dev'
 alias jd='just dev'
 alias gs='git status'
@@ -22,8 +25,8 @@ alias buffer-disable='script -q /dev/null'
 
 alias brs='bin/rails s'
 alias brc='bin/rails c'
-alias arc='just au rails console'
-alias erc='just eu rails console'
+alias jarc='just au rails console'
+alias jerc='just eu rails console'
 alias sk='BUCK_PUSH_ENABLED=false BUCK_PULL_ENABLED=false br worker:go' # SideKiq workers
 alias hc='heroku run rails console --env DISABLE_PRY_RAILS=false --app' # Run "servers" to see options from ~/.ssh/config
 alias hp='heroku pg:psql --app'
