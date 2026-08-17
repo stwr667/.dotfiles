@@ -1,0 +1,138 @@
+#!/usr/bin/env bash
+#
+# mytabs — open a standard set of 5 iTerm2 tabs for a Valiant worktree.
+#
+#   mytabs <directory-name> <colour>
+#
+# All five tabs cd into ~/Projects/valiant-worktrees/<directory-name> and get
+# the same tab colour. The first four start the usual dev processes, the
+# fifth is left as a spare shell.
+#
+# Bash rather than zsh on purpose: this is just a wrapper around osascript,
+# there's nothing zsh-specific in it, and bash makes it shareable. It sticks
+# to bash 3.2 features so it runs on stock macOS /bin/bash too.
+
+set -euo pipefail
+
+WORKTREE_ROOT="$HOME/Projects/valiant-worktrees"
+COLOURS="blue yellow orange purple green red grey"
+
+usage() {
+  cat <<EOF
+Usage: mytabs <directory-name> <colour>
+
+Opens 5 tabs in the current iTerm2 window, all in
+$WORKTREE_ROOT/<directory-name>, tinted <colour>:
+
+  1. just au rails c
+  2. pnpm dev
+  3. just au worker
+  4. tail -f log/development.log
+  5. (nothing — a spare shell)
+
+Colours: $COLOURS
+
+Options:
+  -n, --dry-run   Print what each tab would run, but don't open anything.
+  -h, --help      Show this message.
+EOF
+}
+
+die() {
+  echo "mytabs: $*" >&2
+  exit 1
+}
+
+dry_run=false
+args=()
+for arg in "$@"; do
+  case "$arg" in
+    -h|--help)    usage; exit 0 ;;
+    -n|--dry-run) dry_run=true ;;
+    -*)           die "unknown option '$arg'. Try --help." ;;
+    *)            args+=("$arg") ;;
+  esac
+done
+
+if [ "${#args[@]}" -ne 2 ]; then
+  usage >&2
+  exit 1
+fi
+
+dir_name="${args[0]}"
+colour="$(echo "${args[1]}" | tr '[:upper:]' '[:lower:]')"
+target="$WORKTREE_ROOT/$dir_name"
+
+# Tab colour, as an RGB triple. Muted rather than saturated so the tab bar
+# stays readable.
+case "$colour" in
+  blue)        r=33;  g=118; b=214 ;;
+  yellow)      r=222; g=184; b=16  ;;
+  orange)      r=230; g=126; b=34  ;;
+  purple)      r=142; g=68;  b=173 ;;
+  green)       r=39;  g=148; b=79  ;;
+  red)         r=192; g=57;  b=43  ;;
+  grey|gray)   r=110; g=110; b=110 ;;
+  *)           die "unknown colour '$colour'. Pick one of: $COLOURS" ;;
+esac
+
+if [ ! -d "$target" ]; then
+  echo "mytabs: no such worktree: $target" >&2
+  if [ -d "$WORKTREE_ROOT" ]; then
+    echo "Available:" >&2
+    ls -1 "$WORKTREE_ROOT" | sed 's/^/  /' >&2
+  fi
+  exit 1
+fi
+
+# iTerm2's proprietary escape code for the tab colour — one sequence per
+# channel. Each tab sets its own colour by writing this to its own tty.
+set_colour="printf '\\033]6;1;bg;red;brightness;%d\\a\\033]6;1;bg;green;brightness;%d\\a\\033]6;1;bg;blue;brightness;%d\\a' $r $g $b"
+
+prelude="cd $(printf '%q' "$target") && $set_colour"
+
+tab1="$prelude; just au rails c"
+tab2="$prelude; pnpm dev"
+tab3="$prelude; just au worker"
+tab4="$prelude; tail -f log/development.log"
+tab5="$prelude"
+
+if $dry_run; then
+  i=1
+  for cmd in "$tab1" "$tab2" "$tab3" "$tab4" "$tab5"; do
+    echo "tab $i: $cmd"
+    i=$((i + 1))
+  done
+  exit 0
+fi
+
+# Commands are passed as osascript arguments, so nothing needs escaping into
+# the AppleScript source itself.
+osascript - "$tab1" "$tab2" "$tab3" "$tab4" "$tab5" <<'APPLESCRIPT'
+on run argv
+	tell application "iTerm2"
+		activate
+		if (count of windows) is 0 then
+			-- No window to add to, so make one. It comes with a tab already,
+			-- which takes the first command; the rest get new tabs.
+			set theWindow to (create window with default profile)
+			tell current session of current tab of theWindow
+				write text (item 1 of argv)
+			end tell
+			set theCommands to rest of argv
+		else
+			set theWindow to current window
+			set theCommands to argv
+		end if
+
+		repeat with theCommand in theCommands
+			tell theWindow
+				set theTab to (create tab with default profile)
+			end tell
+			tell current session of theTab
+				write text (theCommand as text)
+			end tell
+		end repeat
+	end tell
+end run
+APPLESCRIPT
