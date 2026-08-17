@@ -76,8 +76,6 @@
         "regionAddAutomatically": true
     },
     "workbench.startupEditor": "none",
-    "gitlens.ai.model": "vscode",
-    "gitlens.ai.vscode.model": "copilot:gpt-4.1",
     "gitlens.blame.format": "${author|12-} ${agoOrDate|14-}",
     "gitlens.heatmap.hotColor": "#ffffff",
     "gitlens.heatmap.coldColor": "#0a1af6",
@@ -129,5 +127,8 @@
     },
     "livePreview.portNumber": 3100,
     "livePreview.notifyOnOpenLooseFile": false,
-    "editor.copyWithSyntaxHighlighting": false
+    "editor.copyWithSyntaxHighlighting": false,
+    "files.associations": {
+        "*.just": "shellscript"
+    }
 }
