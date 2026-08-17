@@ -8,6 +8,11 @@
 # the same tab colour. The first four start the usual dev processes, the
 # fifth is left as a spare shell.
 #
+# Each tab is sent three separate commands — cd, then the tab colour, then the
+# process — rather than one chained line, so that after quitting the process
+# you can press up-arrow once to get it back (and again for the colour, again
+# for the cd).
+#
 # Bash rather than zsh on purpose: this is just a wrapper around osascript,
 # there's nothing zsh-specific in it, and bash makes it shareable. It sticks
 # to bash 3.2 features so it runs on stock macOS /bin/bash too.
@@ -85,53 +90,73 @@ if [ ! -d "$target" ]; then
   exit 1
 fi
 
+cd_command="cd $(printf '%q' "$target")"
+
 # iTerm2's proprietary escape code for the tab colour — one sequence per
 # channel. Each tab sets its own colour by writing this to its own tty.
-set_colour="printf '\\033]6;1;bg;red;brightness;%d\\a\\033]6;1;bg;green;brightness;%d\\a\\033]6;1;bg;blue;brightness;%d\\a' $r $g $b"
+colour_command="printf '\\033]6;1;bg;red;brightness;%d\\a\\033]6;1;bg;green;brightness;%d\\a\\033]6;1;bg;blue;brightness;%d\\a' $r $g $b"
 
-prelude="cd $(printf '%q' "$target") && $set_colour"
-
-tab1="$prelude; just au rails c"
-tab2="$prelude; pnpm dev"
-tab3="$prelude; just au worker"
-tab4="$prelude; tail -f log/development.log"
-tab5="$prelude"
+# One entry per tab; empty means "leave this one at a prompt".
+tab_commands=(
+  "just au rails c"
+  "pnpm dev"
+  "just au worker"
+  "tail -f log/development.log"
+  ""
+)
 
 if $dry_run; then
   i=1
-  for cmd in "$tab1" "$tab2" "$tab3" "$tab4" "$tab5"; do
-    echo "tab $i: $cmd"
+  for cmd in "${tab_commands[@]}"; do
+    echo "tab $i:"
+    echo "  $cd_command"
+    echo "  $colour_command"
+    [ -n "$cmd" ] && echo "  $cmd"
     i=$((i + 1))
   done
   exit 0
 fi
 
 # Commands are passed as osascript arguments, so nothing needs escaping into
-# the AppleScript source itself.
-osascript - "$tab1" "$tab2" "$tab3" "$tab4" "$tab5" <<'APPLESCRIPT'
+# the AppleScript source itself. The cd and colour are identical for every tab,
+# so they go first and the rest of argv is one command per tab.
+osascript - "$cd_command" "$colour_command" "${tab_commands[@]}" <<'APPLESCRIPT'
+on setUpSession(theSession, cdCommand, colourCommand, theCommand)
+	tell application "iTerm2"
+		tell theSession
+			-- Three separate writes, so they land as three separate shell
+			-- history entries and up-arrow walks back through them.
+			write text cdCommand
+			write text colourCommand
+			if theCommand is not "" then
+				write text theCommand
+			end if
+		end tell
+	end tell
+end setUpSession
+
 on run argv
+	set cdCommand to item 1 of argv as text
+	set colourCommand to item 2 of argv as text
+	set tabCommands to items 3 thru -1 of argv
+
 	tell application "iTerm2"
 		activate
 		if (count of windows) is 0 then
 			-- No window to add to, so make one. It comes with a tab already,
 			-- which takes the first command; the rest get new tabs.
 			set theWindow to (create window with default profile)
-			tell current session of current tab of theWindow
-				write text (item 1 of argv)
-			end tell
-			set theCommands to rest of argv
+			my setUpSession(current session of current tab of theWindow, cdCommand, colourCommand, item 1 of tabCommands as text)
+			set tabCommands to rest of tabCommands
 		else
 			set theWindow to current window
-			set theCommands to argv
 		end if
 
-		repeat with theCommand in theCommands
+		repeat with theCommand in tabCommands
 			tell theWindow
 				set theTab to (create tab with default profile)
 			end tell
-			tell current session of theTab
-				write text (theCommand as text)
-			end tell
+			my setUpSession(current session of theTab, cdCommand, colourCommand, theCommand as text)
 		end repeat
 	end tell
 end run
