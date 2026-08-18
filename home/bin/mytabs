@@ -1,17 +1,15 @@
 #!/usr/bin/env bash
 #
-# mytabs — open a standard set of 5 iTerm2 tabs for a Valiant worktree.
+# mytabs — open a standard set of iTerm2 tabs for a Valiant worktree.
 #
 #   mytabs <directory-name> <colour>
 #
-# All five tabs cd into ~/Projects/valiant-worktrees/<directory-name> and get
-# the same tab colour. The first four start the usual dev processes, the
-# fifth is left as a spare shell.
+# Every tab cds into ~/Projects/valiant-worktrees/<directory-name> and gets the
+# same tab colour, then runs whatever tab_commands lists for it.
 #
-# Each tab is sent three separate commands — cd, then the tab colour, then the
-# process — rather than one chained line, so that after quitting the process
-# you can press up-arrow once to get it back (and again for the colour, again
-# for the cd).
+# Commands are sent one line at a time rather than chained with &&, so each
+# lands as its own shell history entry — quit the rails console and up-arrow
+# gets `just au rails c` back, then the colour, then the cd.
 #
 # Bash rather than zsh on purpose: this is just a wrapper around osascript,
 # there's nothing zsh-specific in it, and bash makes it shareable. It sticks
@@ -22,18 +20,47 @@ set -euo pipefail
 WORKTREE_ROOT="$HOME/Projects/valiant-worktrees"
 COLOURS="blue yellow orange purple green red grey"
 
+# One entry per tab, in tab order. An entry may hold several commands, one per
+# line — they are sent in sequence, each as its own command. Leading
+# indentation is stripped, so line them up however reads best. An empty entry
+# leaves that tab sitting at a prompt.
+tab_commands=(
+  "just au rails c"
+  "pnpm dev"
+  "just dev --verbose
+   just au worker"
+  "tail -f log/development.log"
+  ""
+)
+
+# Split a tab entry into one command per line, dropping the indentation and any
+# blank lines. Prints nothing for an empty entry.
+split_commands() {
+  echo "$1" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//' | grep -v '^$' || true
+}
+
+# Render tab_commands for --help, so the two can't drift apart.
+list_tabs() {
+  local i=1 spec cmds
+  for spec in "${tab_commands[@]}"; do
+    cmds="$(split_commands "$spec")"
+    if [ -z "$cmds" ]; then
+      echo "  $i. (nothing — a spare shell)"
+    else
+      echo "$cmds" | sed "1s/^/  $i. /; 1!s/^/     /"
+    fi
+    i=$((i + 1))
+  done
+}
+
 usage() {
   cat <<EOF
 Usage: mytabs <directory-name> <colour>
 
-Opens 5 tabs in the current iTerm2 window, all in
+Opens ${#tab_commands[@]} tabs in the current iTerm2 window, all in
 $WORKTREE_ROOT/<directory-name>, tinted <colour>:
 
-  1. just au rails c
-  2. pnpm dev
-  3. just au worker
-  4. tail -f log/development.log
-  5. (nothing — a spare shell)
+$(list_tabs)
 
 Colours: $COLOURS
 
@@ -96,67 +123,66 @@ cd_command="cd $(printf '%q' "$target")"
 # channel. Each tab sets its own colour by writing this to its own tty.
 colour_command="printf '\\033]6;1;bg;red;brightness;%d\\a\\033]6;1;bg;green;brightness;%d\\a\\033]6;1;bg;blue;brightness;%d\\a' $r $g $b"
 
-# One entry per tab; empty means "leave this one at a prompt".
-tab_commands=(
-  "just au rails c"
-  "pnpm dev"
-  "just dev --verbose && just au worker"
-  "tail -f log/development.log"
-  ""
-)
+# Build each tab's full script: cd, colour, then its own commands. One
+# newline-separated string per tab.
+tab_scripts=()
+for spec in "${tab_commands[@]}"; do
+  script="$cd_command"$'\n'"$colour_command"
+  cmds="$(split_commands "$spec")"
+  [ -n "$cmds" ] && script="$script"$'\n'"$cmds"
+  tab_scripts+=("$script")
+done
 
 if $dry_run; then
   i=1
-  for cmd in "${tab_commands[@]}"; do
+  for script in "${tab_scripts[@]}"; do
     echo "tab $i:"
-    echo "  $cd_command"
-    echo "  $colour_command"
-    [ -n "$cmd" ] && echo "  $cmd"
+    echo "$script" | sed 's/^/  /'
     i=$((i + 1))
   done
   exit 0
 fi
 
-# Commands are passed as osascript arguments, so nothing needs escaping into
-# the AppleScript source itself. The cd and colour are identical for every tab,
-# so they go first and the rest of argv is one command per tab.
-osascript - "$cd_command" "$colour_command" "${tab_commands[@]}" <<'APPLESCRIPT'
-on setUpSession(theSession, cdCommand, colourCommand, theCommand)
+# One osascript argument per tab, holding that tab's newline-separated
+# commands. Passing them as arguments means nothing needs escaping into the
+# AppleScript source itself.
+osascript - "${tab_scripts[@]}" <<'APPLESCRIPT'
+on setUpSession(theSession, theScript)
+	set savedDelimiters to AppleScript's text item delimiters
+	set AppleScript's text item delimiters to linefeed
+	set theCommands to text items of theScript
+	set AppleScript's text item delimiters to savedDelimiters
+
 	tell application "iTerm2"
 		tell theSession
-			-- Three separate writes, so they land as three separate shell
-			-- history entries and up-arrow walks back through them.
-			write text cdCommand
-			write text colourCommand
-			if theCommand is not "" then
-				write text theCommand
-			end if
+			-- One write per command, so each lands as its own shell history
+			-- entry and up-arrow walks back through them.
+			repeat with theCommand in theCommands
+				write text (theCommand as text)
+			end repeat
 		end tell
 	end tell
 end setUpSession
 
 on run argv
-	set cdCommand to item 1 of argv as text
-	set colourCommand to item 2 of argv as text
-	set tabCommands to items 3 thru -1 of argv
-
 	tell application "iTerm2"
 		activate
 		if (count of windows) is 0 then
 			-- No window to add to, so make one. It comes with a tab already,
-			-- which takes the first command; the rest get new tabs.
+			-- which takes the first tab's commands; the rest get new tabs.
 			set theWindow to (create window with default profile)
-			my setUpSession(current session of current tab of theWindow, cdCommand, colourCommand, item 1 of tabCommands as text)
-			set tabCommands to rest of tabCommands
+			my setUpSession(current session of current tab of theWindow, item 1 of argv as text)
+			set theScripts to rest of argv
 		else
 			set theWindow to current window
+			set theScripts to argv
 		end if
 
-		repeat with theCommand in tabCommands
+		repeat with theScript in theScripts
 			tell theWindow
 				set theTab to (create tab with default profile)
 			end tell
-			my setUpSession(current session of theTab, cdCommand, colourCommand, theCommand as text)
+			my setUpSession(current session of theTab, theScript as text)
 		end repeat
 	end tell
 end run
