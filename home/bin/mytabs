@@ -100,7 +100,7 @@ colour_command="printf '\\033]6;1;bg;red;brightness;%d\\a\\033]6;1;bg;green;brig
 tab_commands=(
   "just au rails c"
   "pnpm dev"
-  "just au worker"
+  "just dev --verbose && just au worker"
   "tail -f log/development.log"
   ""
 )
