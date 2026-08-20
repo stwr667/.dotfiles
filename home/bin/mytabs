@@ -2,10 +2,14 @@
 #
 # mytabs — open a standard set of iTerm2 tabs for a Valiant worktree.
 #
-#   mytabs <directory-name> <colour>
+#   mytabs <directory-name> <colour> [tab-count]
 #
 # Every tab cds into ~/Projects/valiant-worktrees/<directory-name> and gets the
-# same tab colour, then runs whatever tab_commands lists for it.
+# same tab colour, then runs whatever its tab set lists for it.
+#
+# The optional tab-count picks a tab set; anything unrecognised (or nothing at
+# all) quietly falls back to the default set. Add a new set by adding a branch
+# to set_tab_commands below.
 #
 # Commands are sent one line at a time rather than chained with &&, so each
 # lands as its own shell history entry — quit the rails console and up-arrow
@@ -20,18 +24,30 @@ set -euo pipefail
 WORKTREE_ROOT="$HOME/Projects/valiant-worktrees"
 COLOURS="blue yellow orange purple green red grey"
 
-# One entry per tab, in tab order. An entry may hold several commands, one per
-# line — they are sent in sequence, each as its own command. Leading
-# indentation is stripped, so line them up however reads best. An empty entry
-# leaves that tab sitting at a prompt.
-tab_commands=(
-  "just au rails c"
-  "pnpm dev"
-  "just dev --verbose
-   just au worker"
-  "tail -f log/development.log"
-  ""
-)
+# Populate tab_commands: one entry per tab, in tab order. An entry may hold
+# several commands, one per line — they are sent in sequence, each as its own
+# command. Leading indentation is stripped, so line them up however reads best.
+# An empty entry leaves that tab sitting at a prompt.
+set_tab_commands() {
+  case "${1:-}" in
+    2)
+      tab_commands=(
+        "just dev --verbose"
+        ""
+      )
+      ;;
+    *)
+      tab_commands=(
+        "just au rails c"
+        "pnpm dev"
+        "just dev --verbose
+         just au worker"
+        "tail -f log/development.log"
+        ""
+      )
+      ;;
+  esac
+}
 
 # Split a tab entry into one command per line, dropping the indentation and any
 # blank lines. Prints nothing for an empty entry.
@@ -55,12 +71,15 @@ list_tabs() {
 
 usage() {
   cat <<EOF
-Usage: mytabs <directory-name> <colour>
+Usage: mytabs <directory-name> <colour> [tab-count]
 
 Opens ${#tab_commands[@]} tabs in the current iTerm2 window, all in
 $WORKTREE_ROOT/<directory-name>, tinted <colour>:
 
 $(list_tabs)
+
+Tab count: 2 picks the short set; anything else, or nothing, picks the default
+set (shown above). Use --dry-run to preview another set's tabs.
 
 Colours: $COLOURS
 
@@ -76,23 +95,33 @@ die() {
 }
 
 dry_run=false
+show_help=false
 args=()
 for arg in "$@"; do
   case "$arg" in
-    -h|--help)    usage; exit 0 ;;
+    -h|--help)    show_help=true ;;
     -n|--dry-run) dry_run=true ;;
     -*)           die "unknown option '$arg'. Try --help." ;;
     *)            args+=("$arg") ;;
   esac
 done
 
-if [ "${#args[@]}" -ne 2 ]; then
+dir_name="${args[0]:-}"
+colour="$(echo "${args[1]:-}" | tr '[:upper:]' '[:lower:]')"
+tab_count="${args[2]:-}"
+
+set_tab_commands "$tab_count"
+
+if $show_help; then
+  usage
+  exit 0
+fi
+
+if [ "${#args[@]}" -lt 2 ] || [ "${#args[@]}" -gt 3 ]; then
   usage >&2
   exit 1
 fi
 
-dir_name="${args[0]}"
-colour="$(echo "${args[1]}" | tr '[:upper:]' '[:lower:]')"
 target="$WORKTREE_ROOT/$dir_name"
 
 # Tab colour, as an RGB triple. Muted rather than saturated so the tab bar
