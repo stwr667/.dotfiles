@@ -131,6 +131,6 @@
     "files.associations": {
         "*.just": "shellscript"
     },
-    "peacock.affectActivityBar": false,
-    "peacock.affectStatusBar": false
+    "peacock.affectStatusBar": false,
+    "peacock.affectTitleBar": false
 }
