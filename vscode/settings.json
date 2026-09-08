@@ -129,7 +129,9 @@
     "livePreview.notifyOnOpenLooseFile": false,
     "editor.copyWithSyntaxHighlighting": false,
     "files.associations": {
-        "*.just": "shellscript"
+        "*.just": "shellscript",
+        "justfile": "shellscript",
+        "load": "shellscript"
     },
     "peacock.affectTitleBar": false,
     "peacock.affectTabActiveBorder": true
