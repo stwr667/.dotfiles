@@ -23,6 +23,9 @@ alias la='ls -al'
 # E.g: script -q /dev/null devLogs.js | grep -v "SecretsServiceJdbcDetailsProvider"
 alias buffer-disable='script -q /dev/null'
 
+# AI related
+alias cfork='claude --resume --fork-session' # Opens with session picker
+
 alias brs='bin/rails s'
 alias brc='bin/rails c'
 alias jarc='just au rails console'
