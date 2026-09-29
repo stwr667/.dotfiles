@@ -134,5 +134,7 @@
         "load": "shellscript"
     },
     "peacock.affectTitleBar": false,
-    "peacock.affectTabActiveBorder": true
+    "peacock.affectTabActiveBorder": true,
+    "claudeCode.hideOnboarding": true,
+    "chatgpt.commentCodeLensEnabled": false
 }
